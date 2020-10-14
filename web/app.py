@@ -24,6 +24,7 @@ class ArticlesAPI(Resource):
         			"code": HTTPStatus.BAD_REQUEST
         		}
         	)
+        
 
 
 api.add_resource(ArticlesAPI, "/articles")
