@@ -24,9 +24,17 @@ class ArticlesAPI(Resource):
         			"code": HTTPStatus.BAD_REQUEST
         		}
         	)
+		inner_data = data["data"]
+		try:
+         	helper.validate_relationships(inner_data["relationships"])
+        except (KeyError, ValueError) as ex:
+            return jsonify(
+				{
+					"message": ex.args[0],
+					"code": HTTPStatus.BAD_REQUEST
+				}
+			)
         
-
-
 api.add_resource(ArticlesAPI, "/articles")
 
 if __name__ == "__main__":
