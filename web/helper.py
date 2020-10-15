@@ -8,6 +8,8 @@ inner_keys_included = inner_keys_data[:3]
 data_attributes = ["title", "body", "created", "updated"]
 included_attributes = ["name", "age", "gender"]
 
+# todo: write validation functions
+
 
 def validate_outter(data_outter: dict):
     keys = list(data.keys())
@@ -60,7 +62,7 @@ def validate_relationships(relationships_data: dict):
 validate_values(data):
     dict_inner = data["data"][0]
     included_dict = data["included"][0]
-    validate_inner_values(dict_inner)
+    status, mesasge = validate_inner_values(dict_inner)
     validate_included_values(included_dict)
 
 
@@ -75,6 +77,9 @@ validate_inner_values(dict_inner):
 				if key == "created" or key == "updated":
 					return False, "invalid data format"
 				# if exception occured but string is not data format
-
+                string_data_validation(key, value)
         if isinstance(value, dict):
+            dict_data_validation(value)
+        if isinstance(value, list):
+            list_data_validation(value)
     
