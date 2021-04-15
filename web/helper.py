@@ -71,12 +71,12 @@ validate_inner_values(dict_inner):
     keys = list(dict_inner.keys())
     for key, value in dict_inner.items():
         if isinstance(value, str):
-			try:
-				date = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%fZ")
-			except ValueError:
-				if key == "created" or key == "updated":
-					return False, "invalid data format"
-				# if exception occured but string is not data format
+		try:
+			date = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%fZ")
+		except ValueError:
+			if key == "created" or key == "updated":
+				return False, "invalid data format"
+			# if exception occured but string is not data format
                 string_data_validation(key, value)
         if isinstance(value, dict):
             dict_data_validation(value)
